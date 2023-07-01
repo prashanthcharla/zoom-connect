@@ -35,3 +35,6 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### Angular Build ###
+/src/main/resources/static/

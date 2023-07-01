@@ -36,6 +36,7 @@
           },
           "configurations": {
             "production": {
+              "outputPath": "../src/main/resources/static",
               "budgets": [
                 {
                   "type": "initial",
