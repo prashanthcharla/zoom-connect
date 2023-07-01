@@ -37,7 +37,6 @@
         "no-console": "off",
         "indent": ["error", 2],
         "camelcase": "error",
-        "no-undef": "error",
         "no-extra-parens": "error"
       }
     },
