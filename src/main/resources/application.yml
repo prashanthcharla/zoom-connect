@@ -1,1 +1,22 @@
+spring:
+  profiles:
+    active: local
+  devtools:
+    add-properties: false
 
+logging:
+  level:
+    web: DEBUG
+
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    enabled: true
+
+swagger:
+  metadata:
+    title: Zoom Connect
+    description: API's to interact with Zoom Connect
+    version: 0.0.1
