@@ -25,8 +25,9 @@ public class FirebaseDaoImpl implements FirebaseDao {
 			DocumentReference docReference = firestore.collection(collection).document(document);
 			ApiFuture<DocumentSnapshot> collectionApiFuture = docReference.get();
 			DocumentSnapshot documentSnapshot = collectionApiFuture.get();
-			if (documentSnapshot.exists())
+			if (documentSnapshot.exists()) {
 				return Optional.of(documentSnapshot.toObject(OauthTokenInfo.class));
+			}
 		} catch (Exception e) {
 			log.error("Unable to fetch oauth token info from {}.{} {}", collection, document);
 			e.printStackTrace();

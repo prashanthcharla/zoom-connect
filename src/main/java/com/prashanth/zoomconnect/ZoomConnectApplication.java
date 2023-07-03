@@ -5,9 +5,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
 import com.prashanth.zoomconnect.config.SwaggerConfigProps;
+import com.prashanth.zoomconnect.config.ZoomMetadata;
 
 @SpringBootApplication
-@EnableConfigurationProperties({ SwaggerConfigProps.class })
+@EnableConfigurationProperties({ SwaggerConfigProps.class, ZoomMetadata.class })
 public class ZoomConnectApplication {
 
 	public static void main(String[] args) {

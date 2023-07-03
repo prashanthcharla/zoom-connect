@@ -10,6 +10,13 @@ springdoc:
   swagger-ui:
     path: /swagger-ui.html
     enabled: true
+    
+zoom:
+  metadata:
+    clientId: N_OdC7USTPqQt0pNgOJc2w
+    clientSecret: EyPBrYz0nYEM9oW41Abe99q6Zdnjme9A
+    oauthTokenStorageCollection: oauthTokens
+    oauthTokenStorageDocument: active
 
 swagger:
   metadata:
