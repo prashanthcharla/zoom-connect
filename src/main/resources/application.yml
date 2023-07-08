@@ -3,6 +3,17 @@ spring:
     active: local
   devtools:
     add-properties: false
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: prashanthcharla1212@gmail.com
+    password: hpylnzpgeogncrnp
+    properties:
+      mail:
+        smtp:
+           auth: true
+           starttls:
+            enable: true
 
 springdoc:
   api-docs:
