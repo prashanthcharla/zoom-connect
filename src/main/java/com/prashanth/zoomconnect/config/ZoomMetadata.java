@@ -11,4 +11,5 @@ public class ZoomMetadata {
 	String clientSecret;
 	String oauthTokenStorageCollection;
 	String oauthTokenStorageDocument;
+	String createdMeetingsStorageCollection;
 }

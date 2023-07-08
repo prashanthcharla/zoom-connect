@@ -10,6 +10,7 @@ import com.google.cloud.firestore.DocumentSnapshot;
 import com.google.cloud.firestore.Firestore;
 import com.google.cloud.firestore.WriteResult;
 import com.google.firebase.cloud.FirestoreClient;
+import com.prashanth.zoomconnect.model.CreateMeetingResponse;
 import com.prashanth.zoomconnect.model.OauthTokenInfo;
 
 import lombok.extern.slf4j.Slf4j;
@@ -48,6 +49,41 @@ public class FirebaseDaoImpl implements FirebaseDao {
 			log.error("Unable to save oauth token info to {}.{} {}", collection, document);
 			e.printStackTrace();
 		}
+		return Optional.empty();
+	}
+
+	@Override
+	public Optional<String> saveCreatedMeeting(CreateMeetingResponse createMeetingResponse, String collection,
+			String document) {
+		try {
+			Firestore firestore = FirestoreClient.getFirestore();
+			ApiFuture<WriteResult> collectionApiFuture = firestore.collection(collection).document(document)
+					.set(createMeetingResponse);
+			return Optional.of(collectionApiFuture.get().getUpdateTime().toString());
+		} catch (Exception e) {
+			log.error("Unable to save created meeting info to {}.{} {}", collection, document);
+			e.printStackTrace();
+		}
+		return Optional.empty();
+	}
+
+	@Override
+	public Optional<CreateMeetingResponse> getCreatedMeeting(String collection, String document) {
+		try {
+			Firestore firestore = FirestoreClient.getFirestore();
+			DocumentReference docReference = firestore.collection(collection).document(document);
+			ApiFuture<DocumentSnapshot> collectionApiFuture = docReference.get();
+			DocumentSnapshot documentSnapshot = collectionApiFuture.get();
+			CreateMeetingResponse obj = null;
+			if (documentSnapshot.exists()) {
+				obj = documentSnapshot.toObject(CreateMeetingResponse.class);
+				return Optional.of(obj);
+			}
+		} catch (Exception e) {
+			log.error("Unable to get created meeting info from {}.{} {}", collection, document);
+			e.printStackTrace();
+		}
+
 		return Optional.empty();
 	}
 

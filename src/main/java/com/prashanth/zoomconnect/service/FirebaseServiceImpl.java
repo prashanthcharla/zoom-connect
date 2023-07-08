@@ -22,6 +22,7 @@ import com.google.firebase.FirebaseOptions;
 import com.google.gson.Gson;
 import com.prashanth.zoomconnect.config.ZoomMetadata;
 import com.prashanth.zoomconnect.dao.FirebaseDao;
+import com.prashanth.zoomconnect.model.CreateMeetingResponse;
 import com.prashanth.zoomconnect.model.OauthTokenInfo;
 
 import jakarta.annotation.PostConstruct;
@@ -31,6 +32,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class FirebaseServiceImpl implements FirebaseService {
 
+	public static boolean oauthTokenRefreshIsInProgress;
+
 	@Autowired
 	private FirebaseDao firebaseDao;
 
@@ -39,6 +42,7 @@ public class FirebaseServiceImpl implements FirebaseService {
 
 	@PostConstruct
 	public void initialize() {
+		oauthTokenRefreshIsInProgress = false;
 		try {
 			log.info("Start: Firebase app initialization.");
 			FileInputStream serviceAccount = new FileInputStream(
@@ -60,7 +64,6 @@ public class FirebaseServiceImpl implements FirebaseService {
 			log.error("Failure: Firebase app initialization.");
 			e.printStackTrace();
 		}
-
 	}
 
 	@Override
@@ -77,6 +80,7 @@ public class FirebaseServiceImpl implements FirebaseService {
 	@Scheduled(fixedRate = 3300000)
 	public void refreshOauthToken() {
 		log.info("Start: Refresh access token.");
+		oauthTokenRefreshIsInProgress = true;
 		String url = "https://api.zoom.us/oauth/token";
 		String clientCredentials = zoomMetadata.getClientId() + ":" + zoomMetadata.getClientSecret();
 		String encodedCredentials = Base64.getEncoder().encodeToString(clientCredentials.getBytes());
@@ -103,5 +107,18 @@ public class FirebaseServiceImpl implements FirebaseService {
 
 		if (savedTimestamp.isPresent())
 			log.info("Complete: Refresh access token");
+
+		oauthTokenRefreshIsInProgress = false;
+	}
+
+	@Override
+	public Optional<String> saveCreatedMeeting(CreateMeetingResponse createMeetingResponse) {
+		return firebaseDao.saveCreatedMeeting(createMeetingResponse, zoomMetadata.getCreatedMeetingsStorageCollection(),
+				String.valueOf(createMeetingResponse.getId()));
+	}
+
+	@Override
+	public Optional<CreateMeetingResponse> getCreatedMeeting(String meetingId) {
+		return firebaseDao.getCreatedMeeting(zoomMetadata.getCreatedMeetingsStorageCollection(), meetingId);
 	}
 }

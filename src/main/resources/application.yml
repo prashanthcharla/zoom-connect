@@ -17,6 +17,7 @@ zoom:
     clientSecret: EyPBrYz0nYEM9oW41Abe99q6Zdnjme9A
     oauthTokenStorageCollection: oauthTokens
     oauthTokenStorageDocument: active
+    createdMeetingsStorageCollection: createdMeetings
 
 swagger:
   metadata:
