@@ -1,12 +1,12 @@
 package com.prashanth.zoomconnect.service;
 
 import java.io.FileInputStream;
-import java.util.Base64;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -19,7 +19,6 @@ import org.springframework.web.client.RestTemplate;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
-import com.google.gson.Gson;
 import com.prashanth.zoomconnect.config.ZoomMetadata;
 import com.prashanth.zoomconnect.dao.FirebaseDao;
 import com.prashanth.zoomconnect.model.CreateMeetingResponse;
@@ -68,7 +67,6 @@ public class FirebaseServiceImpl implements FirebaseService {
 
 	@Override
 	public Optional<OauthTokenInfo> getOauthToken(String collection, String document) {
-		log.info("Reached getOauthToken {}, {}", collection, document);
 		return firebaseDao.getOauthTokenInfoFromDocument(collection, document);
 	}
 
@@ -82,31 +80,37 @@ public class FirebaseServiceImpl implements FirebaseService {
 		log.info("Start: Refresh access token.");
 		oauthTokenRefreshIsInProgress = true;
 		String url = "https://api.zoom.us/oauth/token";
-		String clientCredentials = zoomMetadata.getClientId() + ":" + zoomMetadata.getClientSecret();
-		String encodedCredentials = Base64.getEncoder().encodeToString(clientCredentials.getBytes());
-
-		// Set headers
-		HttpHeaders headers = new HttpHeaders();
-		headers.set(HttpHeaders.AUTHORIZATION, "Basic " + encodedCredentials);
-		headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-
-		// Set request parameters
-		MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
-		map.add("grant_type", "client_credentials");
-
-		HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(map, headers);
-
-		// Call zoom API to refresh the token
-		RestTemplate restTemplate = new RestTemplate();
-		ResponseEntity<String> response = restTemplate.postForEntity(url, entity, String.class);
-
-		// Replace the active OAuth token with new token
-		OauthTokenInfo refreshedOauthTokenInfo = new Gson().fromJson(response.getBody(), OauthTokenInfo.class);
-		Optional<String> savedTimestamp = this.saveOauthToken(refreshedOauthTokenInfo,
+		Optional<OauthTokenInfo> existingOauthTokenInfo = this.getOauthToken(
 				zoomMetadata.getOauthTokenStorageCollection(), zoomMetadata.getOauthTokenStorageDocument());
+		if (existingOauthTokenInfo.isPresent()) {
+			// Set headers
+			HttpHeaders headers = new HttpHeaders();
+			headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
-		if (savedTimestamp.isPresent())
-			log.info("Complete: Refresh access token");
+			// Set request parameters
+			MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
+			map.add("grant_type", "refresh_token");
+			map.add("refresh_token", existingOauthTokenInfo.get().getRefresh_token());
+			map.add("client_id", zoomMetadata.getClientId());
+			map.add("client_secret", zoomMetadata.getClientSecret());
+
+			HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(map, headers);
+
+			// Call zoom API to refresh the token
+			RestTemplate restTemplate = new RestTemplate();
+			ResponseEntity<OauthTokenInfo> response = restTemplate.exchange(url, HttpMethod.POST, entity,
+					OauthTokenInfo.class);
+
+			// Replace the active OAuth token with new token
+			OauthTokenInfo refreshedOauthTokenInfo = response.getBody();
+			Optional<String> savedTimestamp = this.saveOauthToken(refreshedOauthTokenInfo,
+					zoomMetadata.getOauthTokenStorageCollection(), zoomMetadata.getOauthTokenStorageDocument());
+
+			if (savedTimestamp.isPresent())
+				log.info("Complete: Refresh access token");
+		} else {
+			log.error("Existing aouth token info is empty. Thereby, unable to refresh access token.");
+		}
 
 		oauthTokenRefreshIsInProgress = false;
 	}

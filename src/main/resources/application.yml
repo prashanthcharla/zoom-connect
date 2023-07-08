@@ -13,8 +13,10 @@ springdoc:
     
 zoom:
   metadata:
-    clientId: N_OdC7USTPqQt0pNgOJc2w
-    clientSecret: EyPBrYz0nYEM9oW41Abe99q6Zdnjme9A
+    serverUrl: https://api.zoom.us/v2
+    userId: prashanthcharla1212@gmail.com
+    clientId: el6yuXN6S4qZAm3ejwrdqg
+    clientSecret: bZZnYGvobrk14977kVWpusbygw4V8ing
     oauthTokenStorageCollection: oauthTokens
     oauthTokenStorageDocument: active
     createdMeetingsStorageCollection: createdMeetings

@@ -7,6 +7,8 @@ import lombok.Data;
 @Data
 @ConfigurationProperties(prefix = "zoom.metadata")
 public class ZoomMetadata {
+	String serverUrl;
+	String userId;
 	String clientId;
 	String clientSecret;
 	String oauthTokenStorageCollection;

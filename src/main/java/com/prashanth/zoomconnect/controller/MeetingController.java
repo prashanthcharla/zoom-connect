@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.prashanth.zoomconnect.model.CreateMeetingRequest;
 import com.prashanth.zoomconnect.model.CreateMeetingResponse;
+import com.prashanth.zoomconnect.model.MeetingInviteResponse;
 import com.prashanth.zoomconnect.service.FirebaseService;
 import com.prashanth.zoomconnect.service.MeetingService;
 
@@ -63,13 +64,13 @@ public class MeetingController {
 	}
 
 	@GetMapping("/get-invite/{meetingId}")
-	public ResponseEntity<String> getMeetingInvitation(@PathVariable("meetingId") String meetingId) {
-		Optional<String> res = meetingService.getMeetingInvite(Long.parseLong(meetingId));
+	public ResponseEntity<MeetingInviteResponse> getMeetingInvitation(@PathVariable("meetingId") String meetingId) {
+		Optional<MeetingInviteResponse> res = meetingService.getMeetingInvite(Long.parseLong(meetingId));
 		if (res != null) {
-			return new ResponseEntity<String>(res.get(), HttpStatus.OK);
+			return new ResponseEntity<MeetingInviteResponse>(res.get(), HttpStatus.OK);
 		}
 
-		return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<MeetingInviteResponse>(HttpStatus.BAD_REQUEST);
 	}
 
 	@GetMapping("/get-created-meeting/{meetingId}")

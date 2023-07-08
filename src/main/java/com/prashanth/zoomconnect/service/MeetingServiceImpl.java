@@ -15,6 +15,7 @@ import org.springframework.web.client.RestTemplate;
 import com.prashanth.zoomconnect.config.ZoomMetadata;
 import com.prashanth.zoomconnect.model.CreateMeetingRequest;
 import com.prashanth.zoomconnect.model.CreateMeetingResponse;
+import com.prashanth.zoomconnect.model.MeetingInviteResponse;
 import com.prashanth.zoomconnect.model.OauthTokenInfo;
 
 import jakarta.annotation.PostConstruct;
@@ -50,7 +51,7 @@ public class MeetingServiceImpl implements MeetingService {
 			while (FirebaseServiceImpl.oauthTokenRefreshIsInProgress) {
 			}
 			ResponseEntity<CreateMeetingResponse> response = restTemplate.postForEntity(
-					"https://api.zoom.us/v2/users/prashanthcharla1234@gmail.com/meetings", entity,
+					zoomMetadata.getServerUrl() + "/users/" + zoomMetadata.getUserId() + "/meetings", entity,
 					CreateMeetingResponse.class);
 			firebaseService.saveCreatedMeeting(response.getBody());
 			return Optional.of(response.getBody());
@@ -69,7 +70,7 @@ public class MeetingServiceImpl implements MeetingService {
 			while (FirebaseServiceImpl.oauthTokenRefreshIsInProgress) {
 			}
 			ResponseEntity<String> response = restTemplate.exchange(
-					"https://api.zoom.us/v2/users/" + userId + "/meetings?type=" + type, HttpMethod.GET, entity,
+					zoomMetadata.getServerUrl() + "/users/" + userId + "/meetings?type=" + type, HttpMethod.GET, entity,
 					String.class);
 			return Optional.of(response.getBody());
 		}
@@ -78,7 +79,7 @@ public class MeetingServiceImpl implements MeetingService {
 	}
 
 	@Override
-	public Optional<String> getMeetingInvite(long meetingId) {
+	public Optional<MeetingInviteResponse> getMeetingInvite(long meetingId) {
 		if (oauthTokenInfo.isPresent()) {
 			String accessToken = oauthTokenInfo.get().getAccess_token();
 			HttpHeaders headers = new HttpHeaders();
@@ -86,9 +87,9 @@ public class MeetingServiceImpl implements MeetingService {
 			HttpEntity<?> entity = new HttpEntity<>(headers);
 			while (FirebaseServiceImpl.oauthTokenRefreshIsInProgress) {
 			}
-			ResponseEntity<String> response = restTemplate.exchange(
-					"https://api.zoom.us/v2/meetings/" + meetingId + "/invitation", HttpMethod.GET, entity,
-					String.class);
+			ResponseEntity<MeetingInviteResponse> response = restTemplate.exchange(
+					zoomMetadata.getServerUrl() + "/meetings/" + meetingId + "/invitation", HttpMethod.GET, entity,
+					MeetingInviteResponse.class);
 			return Optional.of(response.getBody());
 		}
 
@@ -105,8 +106,8 @@ public class MeetingServiceImpl implements MeetingService {
 			HttpEntity<?> entity = new HttpEntity<>(headers);
 			while (FirebaseServiceImpl.oauthTokenRefreshIsInProgress) {
 			}
-			ResponseEntity<String> response = restTemplate.exchange("https://api.zoom.us/v2//meetings/" + meetingId,
-					HttpMethod.DELETE, entity, String.class);
+			ResponseEntity<String> response = restTemplate.exchange(
+					zoomMetadata.getServerUrl() + "/meetings/" + meetingId, HttpMethod.DELETE, entity, String.class);
 			return Optional.of(response.getStatusCode().equals(HttpStatus.OK));
 		}
 

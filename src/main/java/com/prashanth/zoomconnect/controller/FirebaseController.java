@@ -8,13 +8,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.prashanth.zoomconnect.service.FirebaseServiceImpl;
 
 @RestController
-@RequestMapping(value = "/api")
+@RequestMapping(value = "/api/firebase")
 public class FirebaseController {
-	
+
 	@Autowired
 	FirebaseServiceImpl firebaseService;
 
-	@PostMapping(value = "/refresh")
+	@PostMapping(value = "/oauth-token/refresh")
 	public void refresh() {
 		firebaseService.refreshOauthToken();
 	}
