@@ -10,8 +10,8 @@ import com.google.cloud.firestore.DocumentSnapshot;
 import com.google.cloud.firestore.Firestore;
 import com.google.cloud.firestore.WriteResult;
 import com.google.firebase.cloud.FirestoreClient;
-import com.prashanth.zoomconnect.model.CreateMeetingResponse;
 import com.prashanth.zoomconnect.model.OauthTokenInfo;
+import com.prashanth.zoomconnect.model.response.CreateMeetingResponse;
 
 import lombok.extern.slf4j.Slf4j;
 

@@ -15,12 +15,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.prashanth.zoomconnect.config.ZoomMetadata;
-import com.prashanth.zoomconnect.model.CreateMeetingRequest;
-import com.prashanth.zoomconnect.model.CreateMeetingResponse;
-import com.prashanth.zoomconnect.model.ListMeetingsRequest;
-import com.prashanth.zoomconnect.model.MeetingInviteResponse;
 import com.prashanth.zoomconnect.model.MeetingsList;
 import com.prashanth.zoomconnect.model.OauthTokenInfo;
+import com.prashanth.zoomconnect.model.request.CreateMeetingRequest;
+import com.prashanth.zoomconnect.model.request.ListMeetingsRequest;
+import com.prashanth.zoomconnect.model.response.CreateMeetingResponse;
+import com.prashanth.zoomconnect.model.response.MeetingInviteResponse;
 
 import jakarta.annotation.PostConstruct;
 

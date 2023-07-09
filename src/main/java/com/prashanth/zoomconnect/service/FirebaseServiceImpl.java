@@ -21,8 +21,8 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.prashanth.zoomconnect.config.ZoomMetadata;
 import com.prashanth.zoomconnect.dao.FirebaseDao;
-import com.prashanth.zoomconnect.model.CreateMeetingResponse;
 import com.prashanth.zoomconnect.model.OauthTokenInfo;
+import com.prashanth.zoomconnect.model.response.CreateMeetingResponse;
 
 import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;

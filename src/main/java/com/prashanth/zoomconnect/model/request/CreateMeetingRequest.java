@@ -1,4 +1,7 @@
-package com.prashanth.zoomconnect.model;
+package com.prashanth.zoomconnect.model.request;
+
+import com.prashanth.zoomconnect.model.MeetingSettings;
+import com.prashanth.zoomconnect.model.RecurrenceMeeting;
 
 import lombok.Data;
 

@@ -2,8 +2,8 @@ package com.prashanth.zoomconnect.service;
 
 import java.util.Optional;
 
-import com.prashanth.zoomconnect.model.CreateMeetingResponse;
 import com.prashanth.zoomconnect.model.OauthTokenInfo;
+import com.prashanth.zoomconnect.model.response.CreateMeetingResponse;
 
 public interface FirebaseService {
 	public Optional<OauthTokenInfo> getOauthToken(String collection, String document);

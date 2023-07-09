@@ -1,4 +1,4 @@
-package com.prashanth.zoomconnect.model;
+package com.prashanth.zoomconnect.model.response;
 
 import java.util.List;
 

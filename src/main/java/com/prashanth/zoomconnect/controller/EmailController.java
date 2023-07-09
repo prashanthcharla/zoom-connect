@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.prashanth.zoomconnect.model.EmailRequest;
+import com.prashanth.zoomconnect.model.request.EmailRequest;
 import com.prashanth.zoomconnect.service.EmailService;
 
 @RestController

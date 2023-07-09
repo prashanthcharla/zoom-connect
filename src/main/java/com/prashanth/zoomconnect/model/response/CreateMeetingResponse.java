@@ -1,4 +1,6 @@
-package com.prashanth.zoomconnect.model;
+package com.prashanth.zoomconnect.model.response;
+
+import com.prashanth.zoomconnect.model.MeetingSettings;
 
 import lombok.Data;
 

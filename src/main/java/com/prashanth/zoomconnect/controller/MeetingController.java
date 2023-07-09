@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.prashanth.zoomconnect.model.CreateMeetingRequest;
-import com.prashanth.zoomconnect.model.CreateMeetingResponse;
-import com.prashanth.zoomconnect.model.ListMeetingsRequest;
-import com.prashanth.zoomconnect.model.MeetingInviteResponse;
 import com.prashanth.zoomconnect.model.MeetingsList;
+import com.prashanth.zoomconnect.model.request.CreateMeetingRequest;
+import com.prashanth.zoomconnect.model.request.ListMeetingsRequest;
+import com.prashanth.zoomconnect.model.response.CreateMeetingResponse;
+import com.prashanth.zoomconnect.model.response.MeetingInviteResponse;
 import com.prashanth.zoomconnect.service.FirebaseService;
 import com.prashanth.zoomconnect.service.MeetingService;
 
