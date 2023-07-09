@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.prashanth.zoomconnect.model.Email;
 import com.prashanth.zoomconnect.service.EmailService;
 
-import lombok.extern.slf4j.Slf4j;
-
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping("/api/email")
