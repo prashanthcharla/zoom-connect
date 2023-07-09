@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.prashanth.zoomconnect.model.Email;
+import com.prashanth.zoomconnect.model.EmailRequest;
 import com.prashanth.zoomconnect.service.EmailService;
 
 @RestController
@@ -19,7 +19,7 @@ public class EmailController {
 	EmailService emailService;
 
 	@PostMapping("/send")
-	public void sendEmail(@RequestBody Email email) {
+	public void sendEmail(@RequestBody EmailRequest email) {
 		emailService.sendEmail(email);
 	}
 }
