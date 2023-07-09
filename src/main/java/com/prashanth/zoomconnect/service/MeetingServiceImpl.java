@@ -1,5 +1,7 @@
 package com.prashanth.zoomconnect.service;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +17,9 @@ import org.springframework.web.client.RestTemplate;
 import com.prashanth.zoomconnect.config.ZoomMetadata;
 import com.prashanth.zoomconnect.model.CreateMeetingRequest;
 import com.prashanth.zoomconnect.model.CreateMeetingResponse;
+import com.prashanth.zoomconnect.model.ListMeetingsRequest;
 import com.prashanth.zoomconnect.model.MeetingInviteResponse;
+import com.prashanth.zoomconnect.model.MeetingsList;
 import com.prashanth.zoomconnect.model.OauthTokenInfo;
 
 import jakarta.annotation.PostConstruct;
@@ -61,17 +65,26 @@ public class MeetingServiceImpl implements MeetingService {
 	}
 
 	@Override
-	public Optional<String> getMeetings(String userId, String type) {
+	public Optional<MeetingsList> getMeetings(ListMeetingsRequest request) {
 		if (oauthTokenInfo.isPresent()) {
+			String url = zoomMetadata.getServerUrl() + "/users/{userId}/meetings?type={type}?from={from}?to={to}";
 			String accessToken = oauthTokenInfo.get().getAccess_token();
+
 			HttpHeaders headers = new HttpHeaders();
 			headers.add("Authorization", "Bearer " + accessToken);
 			HttpEntity<?> entity = new HttpEntity<>(headers);
+
+			Map<String, String> uriVariables = new HashMap<>();
+			uriVariables.put("userId", request.getUserId());
+			uriVariables.put("type", request.getType());
+			uriVariables.put("from", request.getFrom());
+			uriVariables.put("to", request.getTo());
+
 			while (FirebaseServiceImpl.oauthTokenRefreshIsInProgress) {
 			}
-			ResponseEntity<String> response = restTemplate.exchange(
-					zoomMetadata.getServerUrl() + "/users/" + userId + "/meetings?type=" + type, HttpMethod.GET, entity,
-					String.class);
+
+			ResponseEntity<MeetingsList> response = restTemplate.exchange(url, HttpMethod.GET, entity,
+					MeetingsList.class, uriVariables);
 			return Optional.of(response.getBody());
 		}
 

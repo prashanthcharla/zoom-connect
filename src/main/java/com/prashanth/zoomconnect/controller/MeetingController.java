@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.prashanth.zoomconnect.model.CreateMeetingRequest;
 import com.prashanth.zoomconnect.model.CreateMeetingResponse;
+import com.prashanth.zoomconnect.model.ListMeetingsRequest;
 import com.prashanth.zoomconnect.model.MeetingInviteResponse;
+import com.prashanth.zoomconnect.model.MeetingsList;
 import com.prashanth.zoomconnect.service.FirebaseService;
 import com.prashanth.zoomconnect.service.MeetingService;
 
@@ -52,15 +54,14 @@ public class MeetingController {
 		return new ResponseEntity<Boolean>(HttpStatus.BAD_REQUEST);
 	}
 
-	@GetMapping("/list/{userId}/{type}")
-	public ResponseEntity<String> listMeetings(@PathVariable("userId") String userId,
-			@PathVariable("type") String type) {
-		Optional<String> res = meetingService.getMeetings(userId, type);
-		if (res != null) {
-			return new ResponseEntity<String>(res.get(), HttpStatus.OK);
+	@GetMapping("/list")
+	public ResponseEntity<MeetingsList> listMeetings(@RequestBody ListMeetingsRequest request) {
+		Optional<MeetingsList> res = meetingService.getMeetings(request);
+		if (res.isPresent()) {
+			return new ResponseEntity<MeetingsList>(res.get(), HttpStatus.OK);
 		}
 
-		return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<MeetingsList>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
 	@GetMapping("/get-invite/{meetingId}")
