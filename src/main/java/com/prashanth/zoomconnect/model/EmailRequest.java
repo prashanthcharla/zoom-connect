@@ -3,7 +3,7 @@ package com.prashanth.zoomconnect.model;
 import lombok.Data;
 
 @Data
-public class Email {
+public class EmailRequest {
 	private String fromMail;
 	private String toMail;
 	private String subject;

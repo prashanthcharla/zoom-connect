@@ -5,7 +5,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
-import com.prashanth.zoomconnect.model.Email;
+import com.prashanth.zoomconnect.model.EmailRequest;
 
 @Service
 public class EmailServiceImpl implements EmailService {
@@ -14,7 +14,7 @@ public class EmailServiceImpl implements EmailService {
 	private JavaMailSender javaMailSender;
 
 	@Override
-	public void sendEmail(Email email) {
+	public void sendEmail(EmailRequest email) {
 		SimpleMailMessage mailMessage = new SimpleMailMessage();
 		mailMessage.setFrom(email.getFromMail());
 		mailMessage.setTo(email.getToMail());
