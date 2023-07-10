@@ -1,22 +1,23 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
+import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { BrowserModule } from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
-import { ReactiveFormsModule } from '@angular/forms';
-import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireDatabaseModule } from '@angular/fire//compat/database';
+import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireMessagingModule } from '@angular/fire/compat/messaging';
-import { FIREBASE_CONFIG } from './helper/Constants';
+import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { InstantMeetingComponent } from './component/instant-meeting/instant-meeting.component';
+import { FIREBASE_CONFIG } from './helper/Constants';
 import { MaterialModule } from './material/material.module';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, InstantMeetingComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -34,4 +35,4 @@ import { MaterialModule } from './material/material.module';
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

@@ -1,0 +1,32 @@
+<div class="instantMeetingLayout" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="1em" style="width: 100%;">
+    <div fxLayout="row" fxlayoutAlign="center center" fxLayoutGap="2em">
+        <div fxLayout="column" fxLayoutAlign="center">
+            <label for="participantInput">Add Participants: </label>
+        </div>
+        <div>
+            <mat-form-field>
+                <mat-label>Participants</mat-label>
+                <mat-chip-grid #chipGrid aria-label="Enter participants" [disabled]="!enableControls">
+                    <mat-chip-row *ngFor="let participant of selectedParticipants"
+                        (removed)="removeParticipant(participant)" [editable]="true"
+                        (edited)="editParticipant(participant, $event)"
+                        [aria-description]="'press enter to edit ' + participant">
+                        {{participant}}
+                        <button matChipRemove [attr.aria-label]="'remove ' + participant">
+                            <mat-icon>cancel</mat-icon>
+                        </button>
+                    </mat-chip-row>
+                    <input id="participantInput" placeholder="New Participant..." [matChipInputFor]="chipGrid"
+                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes" matChipInputAddOnBlur="true"
+                        (matChipInputTokenEnd)="addParticipant($event)"/>
+                </mat-chip-grid>
+            </mat-form-field>
+        </div>
+    </div>
+    <div>
+        <button mat-raised-button color="primary" (click)="startMeeting()" [disabled]="!enableControls">Start Meeting</button>
+    </div>
+    <div *ngIf="enableSpinner">
+        <mat-progress-spinner diameter="40" color="primary" mode="indeterminate"></mat-progress-spinner>
+    </div>
+</div>
