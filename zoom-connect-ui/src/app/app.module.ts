@@ -12,6 +12,7 @@ import { AngularFireDatabaseModule } from '@angular/fire//compat/database';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireMessagingModule } from '@angular/fire/compat/messaging';
 import { FIREBASE_CONFIG } from './helper/Constants';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,7 +26,8 @@ import { FIREBASE_CONFIG } from './helper/Constants';
     AngularFireAuthModule,
     AngularFireMessagingModule,
     NgMultiSelectDropDownModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent],
