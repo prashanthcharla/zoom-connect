@@ -9,7 +9,6 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireMessagingModule } from '@angular/fire/compat/messaging';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { InstantMeetingComponent } from './component/instant-meeting/instant-meeting.component';
@@ -27,7 +26,6 @@ import { MaterialModule } from './material/material.module';
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     AngularFireMessagingModule,
-    NgMultiSelectDropDownModule,
     FlexLayoutModule,
     BrowserAnimationsModule,
     MaterialModule
