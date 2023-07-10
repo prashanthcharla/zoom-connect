@@ -18,7 +18,7 @@ import com.prashanth.zoomconnect.config.ZoomMetadata;
 import com.prashanth.zoomconnect.model.MeetingsList;
 import com.prashanth.zoomconnect.model.OauthTokenInfo;
 import com.prashanth.zoomconnect.model.request.CreateMeetingRequest;
-import com.prashanth.zoomconnect.model.request.ListMeetingsRequest;
+import com.prashanth.zoomconnect.model.request.MeetingsListRequest;
 import com.prashanth.zoomconnect.model.response.CreateMeetingResponse;
 import com.prashanth.zoomconnect.model.response.MeetingInviteResponse;
 
@@ -65,7 +65,7 @@ public class MeetingServiceImpl implements MeetingService {
 	}
 
 	@Override
-	public Optional<MeetingsList> getMeetings(ListMeetingsRequest request) {
+	public Optional<MeetingsList> getMeetings(MeetingsListRequest request) {
 		if (oauthTokenInfo.isPresent()) {
 			String url = zoomMetadata.getServerUrl() + "/users/{userId}/meetings?type={type}?from={from}?to={to}";
 			String accessToken = oauthTokenInfo.get().getAccess_token();

@@ -3,7 +3,7 @@ package com.prashanth.zoomconnect.model.request;
 import lombok.Data;
 
 @Data
-public class ListMeetingsRequest {
+public class MeetingsListRequest {
 	String userId;
 	String type;
 	String from;

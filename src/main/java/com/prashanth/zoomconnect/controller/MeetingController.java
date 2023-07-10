@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.prashanth.zoomconnect.model.MeetingsList;
 import com.prashanth.zoomconnect.model.request.CreateMeetingRequest;
-import com.prashanth.zoomconnect.model.request.ListMeetingsRequest;
+import com.prashanth.zoomconnect.model.request.MeetingsListRequest;
 import com.prashanth.zoomconnect.model.response.CreateMeetingResponse;
 import com.prashanth.zoomconnect.model.response.MeetingInviteResponse;
 import com.prashanth.zoomconnect.service.FirebaseService;
@@ -55,7 +55,7 @@ public class MeetingController {
 	}
 
 	@GetMapping("/list")
-	public ResponseEntity<MeetingsList> listMeetings(@RequestBody ListMeetingsRequest request) {
+	public ResponseEntity<MeetingsList> listMeetings(@RequestBody MeetingsListRequest request) {
 		Optional<MeetingsList> res = meetingService.getMeetings(request);
 		if (res.isPresent()) {
 			return new ResponseEntity<MeetingsList>(res.get(), HttpStatus.OK);
