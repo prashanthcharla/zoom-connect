@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -10,7 +11,7 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireDatabaseModule } from '@angular/fire//compat/database';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireMessagingModule } from '@angular/fire/compat/messaging';
-import { FIREBASE_CONFIG } from './Constants';
+import { FIREBASE_CONFIG } from './helper/Constants';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,7 +24,8 @@ import { FIREBASE_CONFIG } from './Constants';
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     AngularFireMessagingModule,
-    NgMultiSelectDropDownModule
+    NgMultiSelectDropDownModule,
+    FlexLayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent],
