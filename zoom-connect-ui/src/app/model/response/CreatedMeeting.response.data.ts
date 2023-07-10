@@ -1,3 +1,4 @@
+import { RecurrenceMeeting } from '../request/Recurrence.request.data';
 import { MeetingSettings } from '../request/Settings.request.data';
 
 export interface CreatedMeetingResponse {
@@ -20,5 +21,6 @@ export interface CreatedMeetingResponse {
     pstn_password: string;
     encrypted_password: string;
     pmi: string;
+    recurrence: RecurrenceMeeting;
     settings: MeetingSettings;
 }
