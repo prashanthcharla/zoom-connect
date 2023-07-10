@@ -9,6 +9,7 @@ import lombok.Data;
 public class ZoomMetadata {
 	String serverUrl;
 	String userId;
+	String userName;
 	String clientId;
 	String clientSecret;
 	String oauthTokenStorageCollection;

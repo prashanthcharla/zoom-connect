@@ -26,6 +26,7 @@ zoom:
   metadata:
     serverUrl: https://api.zoom.us/v2
     userId: prashanthcharla1212@gmail.com
+    userName: Prashanth Charla
     clientId: el6yuXN6S4qZAm3ejwrdqg
     clientSecret: bZZnYGvobrk14977kVWpusbygw4V8ing
     oauthTokenStorageCollection: oauthTokens
