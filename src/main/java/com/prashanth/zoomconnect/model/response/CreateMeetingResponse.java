@@ -1,6 +1,7 @@
 package com.prashanth.zoomconnect.model.response;
 
 import com.prashanth.zoomconnect.model.MeetingSettings;
+import com.prashanth.zoomconnect.model.RecurrenceMeeting;
 
 import lombok.Data;
 
@@ -25,5 +26,6 @@ public class CreateMeetingResponse {
 	private String pstn_password;
 	private String encrypted_password;
 	private String pmi;
+    private RecurrenceMeeting recurrence;
 	private MeetingSettings settings;
 }
