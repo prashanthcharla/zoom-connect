@@ -121,7 +121,7 @@ public class MeetingServiceImpl implements MeetingService {
 			}
 			ResponseEntity<String> response = restTemplate.exchange(
 					zoomMetadata.getServerUrl() + "/meetings/" + meetingId, HttpMethod.DELETE, entity, String.class);
-			return Optional.of(response.getStatusCode().equals(HttpStatus.OK));
+			return Optional.of(response.getStatusCode().equals(HttpStatus.NO_CONTENT));
 		}
 
 		return Optional.empty();
