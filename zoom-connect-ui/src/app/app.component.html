@@ -4,7 +4,7 @@
             <h1>Zoom Connect</h1>
         </div>
         <div>
-            <mat-button-toggle-group name="mainButtons" aria-label="Main Buttons">
+            <mat-button-toggle-group name="mainButtons" aria-label="Main Buttons" [disabled]="isAnyMeetingRunning$ | async">
                 <mat-button-toggle routerLink="instant-meeting" checked="true">Instant Meeting</mat-button-toggle>
                 <mat-button-toggle>Schedule a meeting</mat-button-toggle>
                 <mat-button-toggle>My Meetings</mat-button-toggle>
@@ -12,6 +12,11 @@
         </div>
         <div>
             <router-outlet></router-outlet>
+        </div>
+        <div>
+            <div id="meetingSDKElement">
+                <!-- Zoom Meeting SDK Rendered Here -->
+            </div>
         </div>
     </div>
 </main>

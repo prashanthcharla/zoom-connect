@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { AuthService } from './service/auth.service';
+import { MeetingService } from './service/meeting.service';
 
 @Component({
   selector: 'app-root',
@@ -9,13 +10,17 @@ import { AuthService } from './service/auth.service';
 })
 export class AppComponent implements OnInit {
 
-  private _subscriptions: Subscription;
+  isAnyMeetingRunning$: Observable<boolean>;
 
-  constructor(private _authService: AuthService) {
-    this._subscriptions = new Subscription();
+  constructor(
+    private _authService: AuthService,
+    private _meetingService: MeetingService
+  ) {
+    this.isAnyMeetingRunning$ = of(false);
   }
 
   ngOnInit(): void {
     this._authService.getAuthCreds();
+    this.isAnyMeetingRunning$ = this._meetingService.isAnyMeetingInProgress$;
   }
 }

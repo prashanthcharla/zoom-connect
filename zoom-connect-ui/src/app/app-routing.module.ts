@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { InstantMeetingComponent } from './component/instant-meeting/instant-meeting.component';
 
 const routes: Routes = [
+  { path: '', redirectTo: 'instant-meeting', pathMatch: 'full' },
   { path: 'instant-meeting', component: InstantMeetingComponent }
 ];
 
@@ -10,4 +11,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

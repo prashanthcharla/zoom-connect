@@ -1,7 +1,13 @@
-<div class="instantMeetingLayout" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="1em" style="width: 100%;">
-    <div fxLayout="row" fxlayoutAlign="center center" fxLayoutGap="2em">
-        <div fxLayout="column" fxLayoutAlign="center">
-            <label for="participantInput">Add Participants: </label>
+<div class="instantMeetingLayout" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="1em">
+    <div fxLayout="column" fxlayoutAlign="center center" fxLayoutGap="1em">
+        <div>
+            <mat-form-field>
+                <mat-label>Topic</mat-label>
+                <input id="meetingTopicInput" matInput [formControl]="topicControl" autocomplete="off" required>
+                <mat-error *ngIf="topicControl.hasError('required')">
+                  Topic is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
         </div>
         <div>
             <mat-form-field>
@@ -24,7 +30,7 @@
         </div>
     </div>
     <div>
-        <button mat-raised-button color="primary" (click)="startMeeting()" [disabled]="!enableControls">Start Meeting</button>
+        <button mat-raised-button color="primary" [disabled]="!enableControls || !topicControl.valid" (click)="startMeeting()">Start Meeting</button>
     </div>
     <div *ngIf="enableSpinner">
         <mat-progress-spinner diameter="40" color="primary" mode="indeterminate"></mat-progress-spinner>
