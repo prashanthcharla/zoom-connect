@@ -14,9 +14,14 @@ import { AppComponent } from './app.component';
 import { InstantMeetingComponent } from './component/instant-meeting/instant-meeting.component';
 import { FIREBASE_CONFIG } from './helper/Constants';
 import { MaterialModule } from './material/material.module';
+import { MyMeetingsComponent } from './component/my-meetings/my-meetings.component';
 
 @NgModule({
-  declarations: [AppComponent, InstantMeetingComponent],
+  declarations: [
+    AppComponent, 
+    InstantMeetingComponent,
+    MyMeetingsComponent
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
