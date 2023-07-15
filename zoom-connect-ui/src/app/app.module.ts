@@ -15,12 +15,16 @@ import { InstantMeetingComponent } from './component/instant-meeting/instant-mee
 import { FIREBASE_CONFIG } from './helper/Constants';
 import { MaterialModule } from './material/material.module';
 import { MyMeetingsComponent } from './component/my-meetings/my-meetings.component';
+import { ScheduleAMeetingComponent } from './component/schedule-a-meeting/schedule-a-meeting.component';
+import { ParticipantComponent } from './component/participant/participant.component';
 
 @NgModule({
   declarations: [
     AppComponent, 
     InstantMeetingComponent,
-    MyMeetingsComponent
+    ScheduleAMeetingComponent,
+    MyMeetingsComponent,
+    ParticipantComponent
   ],
   imports: [
     BrowserModule,

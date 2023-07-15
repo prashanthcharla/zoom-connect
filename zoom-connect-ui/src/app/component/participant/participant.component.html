@@ -1,0 +1,16 @@
+<mat-form-field>
+    <mat-label>Participants</mat-label>
+    <mat-chip-grid #chipGrid aria-label="Enter participants" [disabled]="!enableParticipantControl">
+        <mat-chip-row *ngFor="let participant of selectedParticipants" (removed)="removeParticipant(participant)"
+            [editable]="true" (edited)="editParticipant(participant, $event)"
+            [aria-description]="'press enter to edit ' + participant">
+            {{participant}}
+            <button matChipRemove [attr.aria-label]="'remove ' + participant">
+                <mat-icon>cancel</mat-icon>
+            </button>
+        </mat-chip-row>
+        <input id="participantInput" placeholder="New Participant..." [matChipInputFor]="chipGrid"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes" matChipInputAddOnBlur="true"
+            (matChipInputTokenEnd)="addParticipant($event)" />
+    </mat-chip-grid>
+</mat-form-field>
