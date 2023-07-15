@@ -6,11 +6,11 @@
         <div>
             <mat-button-toggle-group name="mainButtons" aria-label="Main Buttons" [disabled]="isAnyMeetingRunning$ | async">
                 <mat-button-toggle routerLink="instant-meeting" checked="true">Instant Meeting</mat-button-toggle>
-                <mat-button-toggle routerLink="list">Schedule a meeting</mat-button-toggle>
-                <mat-button-toggle>My Meetings</mat-button-toggle>
+                <mat-button-toggle>Schedule a meeting</mat-button-toggle>
+                <mat-button-toggle routerLink="list">My Meetings</mat-button-toggle>
             </mat-button-toggle-group>
         </div>
-        <div>
+        <div style="width: 40%;">
             <router-outlet></router-outlet>
         </div>
         <div>

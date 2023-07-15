@@ -1,1 +1,53 @@
-<p>my-meetings works!</p>
+<div fxLayout="column" fxLayoutAlign="center center" fxFlexFill class="myMeetingsTemplate">
+    <div>
+        <mat-radio-group aria-label="Select an option" color="primary" [formControl]="selectedType">
+            <mat-radio-button value="scheduled">Scheduled</mat-radio-button>
+            <mat-radio-button value="upcoming">Upcoming</mat-radio-button>
+            <mat-radio-button value="live">Live</mat-radio-button>
+        </mat-radio-group>
+    </div>
+    <div *ngIf="enableSpinner">
+        <mat-spinner></mat-spinner>
+    </div>
+    <div fxLayout="column" fxLayoutGap="1em" fxFlexFill *ngIf="!enableSpinner">
+        <div *ngFor="let meeting of meetingsList.meetings;let i=index" fxLayout="column" fxLayoutAlign="center center"
+            fxLayoutGap="0.5em">
+            <div fxLayout="row" fxLayoutAlign="space-between center" fxFlexFill>
+                <div>
+                    {{ meeting.topic }}
+                    <button mat-button class="infoBtn" (click)="showInfoForMeet[i]=!showInfoForMeet[i]">{{
+                        showInfoForMeet[i] ? 'Hide' : 'Show' }} Information</button>
+                </div>
+                <div>
+                    <button mat-raised-button color="primary">Join</button>
+                </div>
+            </div>
+            <div *ngIf="showInfoForMeet[i]">
+                <table class="table table-bordered table-hover">
+                    <tbody>
+                        <tr>
+                            <td class="header">Topic</td>
+                            <td>{{meeting.topic}}</td>
+                        </tr>
+                        <tr>
+                            <td class="header">Start Time</td>
+                            <td>{{meeting.start_time | date: 'medium'}}</td>
+                        </tr>
+                        <tr>
+                            <td class="header">Duration</td>
+                            <td>{{meeting.duration}}</td>
+                        </tr>
+                        <tr>
+                            <td class="header">Created At</td>
+                            <td>{{meeting.created_at | date: 'medium'}}</td>
+                        </tr>
+                        <tr>
+                            <td class="header">Join URL</td>
+                            <td>{{meeting.join_url}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

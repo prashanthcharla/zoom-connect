@@ -1,0 +1,16 @@
+div.myMeetingsTemplate {
+    .infoBtn {
+        font-size: 0.875em;
+    }
+
+    table {
+        td {
+            max-width: 100%;
+            white-space: nowrap;
+        }
+
+        td.header {
+            font-weight: 500;
+        }
+    }
+}
