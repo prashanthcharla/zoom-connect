@@ -10,7 +10,7 @@ public class MeetingDetails {
 	LocalDateTime created_at;
 	int duration;
 	String host_id;
-	int id;
+	long id;
 	String join_url;
 	String pmi;
 	LocalDateTime start_time;

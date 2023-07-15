@@ -54,7 +54,7 @@ public class MeetingController {
 		return new ResponseEntity<Boolean>(HttpStatus.BAD_REQUEST);
 	}
 
-	@GetMapping("/list")
+	@PostMapping("/list")
 	public ResponseEntity<MeetingsList> listMeetings(@RequestBody MeetingsListRequest request) {
 		Optional<MeetingsList> res = meetingService.getMeetings(request);
 		if (res.isPresent()) {
